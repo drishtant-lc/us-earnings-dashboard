@@ -1,6 +1,4 @@
-const fetch = require("node-fetch");
-
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
   const apiKey = "yxIGO1sJoAjA8pqy3YJ1CpPhdks56EOO";
   const symbols = ["AAPL", "MSFT", "JPM", "GOOGL", "META"];
   const results = [];
@@ -14,7 +12,7 @@ module.exports = async (req, res) => {
       const epsUrl = `https://financialmodelingprep.com/api/v3/earnings-surprises/${symbol}?limit=1&apikey=${apiKey}`;
       const epsRes = await fetch(epsUrl);
       const epsData = await epsRes.json();
-      console.log(`EPS raw response for ${symbol}:`, JSON.stringify(epsData));
+      console.log(`EPS raw response for ${symbol}:`, epsData);
 
       if (Array.isArray(epsData) && epsData.length > 0) {
         const eps = epsData[0];
@@ -45,5 +43,5 @@ module.exports = async (req, res) => {
     });
   }
 
-  res.status(200).json(results);
-};
+  return res.status(200).json(results);
+}
