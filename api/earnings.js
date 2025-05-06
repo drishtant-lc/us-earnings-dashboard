@@ -16,7 +16,8 @@ module.exports = async (req, res) => {
       const epsUrl = `https://financialmodelingprep.com/api/v3/earnings-surprises/${symbol}?limit=1&apikey=${apiKey}`;
       const epsResponse = await fetch(epsUrl);
       const epsData = await epsResponse.json();
-      const epsItem = epsData[0];
+      console.log(`EPS data for ${symbol}:`, epsData);
+      const epsItem = Array.isArray(epsData) && epsData.length > 0 ? epsData[0] : null;
       if (epsItem) {
         epsActual = epsItem.actualEarnings;
         epsEstimate = epsItem.estimatedEarnings;
@@ -30,7 +31,8 @@ module.exports = async (req, res) => {
       const revUrl = `https://financialmodelingprep.com/api/v3/income-statement/${symbol}?limit=1&apikey=${apiKey}`;
       const revResponse = await fetch(revUrl);
       const revData = await revResponse.json();
-      const revItem = revData[0];
+      console.log(`Revenue data for ${symbol}:`, revData);
+      const revItem = Array.isArray(revData) && revData.length > 0 ? revData[0] : null;
       if (revItem) {
         revenueActual = revItem.revenue;
       }
