@@ -21,12 +21,12 @@ export default function EarningsDashboard() {
     datasets: [
       {
         label: "EPS Actual",
-        data: filtered.map((item) => item.epsActual),
+        data: filtered.map((item) => item.epsActual ?? 0),
         backgroundColor: "red",
       },
       {
         label: "EPS Estimate",
-        data: filtered.map((item) => item.epsEstimate),
+        data: filtered.map((item) => item.epsEstimate ?? 0),
         backgroundColor: "black",
       },
     ],
@@ -46,18 +46,26 @@ export default function EarningsDashboard() {
         {filtered.map((item, index) => (
           <div key={index} style={{ border: "1px solid #ccc", margin: 10, padding: 10 }}>
             <h2>{item.ticker}</h2>
-            <p>EPS: {item.epsActual ?? "N/A"} (Est: {item.epsEstimate ?? "N/A"})</p>
-<p>
-  Revenue: $
-  {item.revenueActual && item.revenueActual > 0
-    ? item.revenueActual.toLocaleString()
-    : "N/A"}{" "}
-  (Est: $
-  {item.revenueEstimate && item.revenueEstimate > 0
-    ? item.revenueEstimate.toLocaleString()
-    : "N/A"})
-</p>
-
+            <p>
+              EPS:{" "}
+              {item.epsActual !== null && item.epsActual !== undefined
+                ? item.epsActual
+                : "N/A"}{" "}
+              (Est:{" "}
+              {item.epsEstimate !== null && item.epsEstimate !== undefined
+                ? item.epsEstimate
+                : "N/A"})
+            </p>
+            <p>
+              Revenue: $
+              {item.revenueActual && item.revenueActual > 0
+                ? item.revenueActual.toLocaleString()
+                : "N/A"}{" "}
+              (Est: $
+              {item.revenueEstimate && item.revenueEstimate > 0
+                ? item.revenueEstimate.toLocaleString()
+                : "N/A"})
+            </p>
           </div>
         ))}
       </div>
