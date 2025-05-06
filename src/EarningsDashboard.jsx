@@ -46,8 +46,18 @@ export default function EarningsDashboard() {
         {filtered.map((item, index) => (
           <div key={index} style={{ border: "1px solid #ccc", margin: 10, padding: 10 }}>
             <h2>{item.ticker}</h2>
-            <p>EPS: {item.epsActual} (Est: {item.epsEstimate})</p>
-            <p>Revenue: ${item.revenueActual.toLocaleString()} (Est: ${item.revenueEstimate.toLocaleString()})</p>
+            <p>EPS: {item.epsActual ?? "N/A"} (Est: {item.epsEstimate ?? "N/A"})</p>
+<p>
+  Revenue: $
+  {item.revenueActual && item.revenueActual > 0
+    ? item.revenueActual.toLocaleString()
+    : "N/A"}{" "}
+  (Est: $
+  {item.revenueEstimate && item.revenueEstimate > 0
+    ? item.revenueEstimate.toLocaleString()
+    : "N/A"})
+</p>
+
           </div>
         ))}
       </div>
