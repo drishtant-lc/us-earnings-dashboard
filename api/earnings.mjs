@@ -1,3 +1,5 @@
+import { fetch } from 'undici';
+
 export default async function handler(req, res) {
   const apiKey = "yxIGO1sJoAjA8pqy3YJ1CpPhdks56EOO";
   const symbols = ["AAPL", "MSFT", "JPM", "GOOGL", "META"];
