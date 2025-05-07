@@ -1,7 +1,7 @@
 {
   "version": 2,
   "functions": {
-    "api/earnings.mjs": {
+    "api/earnings.js": {
       "runtime": "nodejs18.x"
     }
   }
